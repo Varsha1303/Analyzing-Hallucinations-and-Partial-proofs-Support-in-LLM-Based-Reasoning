@@ -1,0 +1,44 @@
+{
+    "example1": {
+        "theory": "Each gorpus is a lempus. Grimpuses are lorpuses. Every grimpus is not discordant. Lorpuses are not kind. Sterpuses are luminous. Lorpuses are shumpuses. Each brimpus is large. Every dumpus is nervous. Jompuses are not cold. Rompuses are impuses. Lorpuses are sterpuses. Impuses are jompuses. Each grimpus is a dumpus. Rompuses are brimpuses. Rompuses are not overcast. Gorpuses are moderate. Each impus is not floral. Impuses are grimpuses. Wren is a gorpus. Wren is a grimpus.",
+        "query": "Prove: Wren is not kind.",
+        "gold_standard_proof": [
+            "Step_20: Wren is a grimpus.",
+            "Step_2: Grimpuses are lorpuses.",
+            "Derived: Wren is a lorpus.",
+            "Step_4: Lorpuses are not kind.",
+            "Derived: Wren is not kind."
+        ],
+        "pure_llm_baseline": "Here's a step-by-step logical deduction:\n\n1.  Wren is a grimpus. (Given in the theory: \"Wren is a grimpus.\")\n2.  Grimpuses are lorpuses. (Given in the theory: \"Grimpuses are lorpuses.\")\n3.  From (1) and (2), it follows that Wren is a lorpus.\n4.  Lorpuses are not kind. (Given in the theory: \"Lorpuses are not kind.\")\n5.  From (3) and (4), it follows that Wren is not kind.\n\nTherefore, Wren is not kind.",
+        "hybrid_z3_verdict": "SUCCESS: Verified. Core: [Step_2,\n Step_4,\n Step_20_Wren_is_grimpus,\n Negation_Query_Wren_is_kind]",
+        "comparative_analysis": "### 1. Verified Logical Chain\n\n*   Wren is a grimpus.\n*   Grimpuses are lorpuses.\n*   Derived: Wren is a lorpus.\n*   Lorpuses are not kind.\n*   Derived: Wren is not kind.\n\n### 2. Comparative Analysis\n\nIn this specific instance, the PURE LLM BASELINE demonstrates exceptional accuracy, perfectly mirroring both the GOLD STANDARD PROOF and our Z3-verified logical chain. The LLM correctly identified all necessary premises from the original theory (\"Wren is a grimpus,\" \"Grimpuses are lorpuses,\" \"Lorpuses are not kind\") and derived the intermediate step (\"Wren is a lorpus\") without any hallucination or skipped steps. The Z3 verification, while crucial for establishing formal correctness and identifying the minimal premise set (unsat core) in more complex or error-prone scenarios, primarily serves to confirm the LLM's accurate reasoning in this particular case rather than correcting any errors. This highlights the potential for large language models to perform sound logical deduction when the reasoning path is clear and direct.\n\n### 3. Graceful Degradation (Belief Revision)\n\nLet's relax the premise: \"Grimpuses are lorpuses.\"\n\n**New Partial Valid Prefix/Derivation:**\n\n*   Wren is a grimpus.\n*   Lorpuses are not kind.\n\nWithout the premise \"Grimpuses are lorpuses,\" we can no longer establish a link between Wren's identity as a grimpus and its potential identity as a lorpus. Therefore, the derivation \"Wren is a lorpus\" cannot be made, and consequently, the final conclusion \"Wren is not kind\" cannot be proven from the remaining premises."
+    },
+    "example2": {
+        "theory": "Yumpuses are large. Each wumpus is not luminous. Every vumpus is a rompus. Vumpuses are zumpuses. Every rompus is earthy. Zumpuses are yumpuses. Wumpuses are tumpuses. Each vumpus is transparent. Zumpuses are dumpuses. Each zumpus is angry. Polly is a wumpus. Polly is a vumpus.",
+        "query": "Prove: Polly is angry.",
+        "gold_standard_proof": [
+            "Step_12: Polly is a vumpus.",
+            "Step_4: Vumpuses are zumpuses.",
+            "Derived: Polly is a zumpus.",
+            "Step_10: Each zumpus is angry.",
+            "Derived: Polly is angry."
+        ],
+        "pure_llm_baseline": "Here's the step-by-step logical deduction:\n\n1.  **Polly is a vumpus.** (Given)\n2.  **Vumpuses are zumpuses.** (Given)\n3.  **From (1) and (2), we can conclude that Polly is a zumpus.** (If Polly is a vumpus and all vumpuses are zumpuses, then Polly must be a zumpus.)\n4.  **Each zumpus is angry.** (Given)\n5.  **From (3) and (4), we can conclude that Polly is angry.** (If Polly is a zumpus and all zumpuses are angry, then Polly must be angry.)\n\n**Conclusion:** Polly is angry.",
+        "hybrid_z3_verdict": "SUCCESS: Verified. Core: [Step_4, Query_Negation, Step_12, Step_10]",
+        "comparative_analysis": "### 1. Verified Logical Chain\n\n*   Polly is a vumpus.\n*   Vumpuses are zumpuses.\n*   Derived: Polly is a zumpus.\n*   Each zumpus is angry.\n*   Derived: Polly is angry.\n\n### 2. Comparative Analysis\n\nIn this particular instance, the PURE LLM BASELINE successfully identified the correct and minimal logical chain to prove \"Polly is angry.\" Its step-by-step deduction precisely mirrors the GOLD STANDARD PROOF and the path identified by the HYBRID Z3 UNSAT CORE labels. The LLM did not hallucinate any facts or skip any necessary steps. It demonstrated faithful logical reasoning for this specific query.\n\nThe Z3 verification, in this case, served to *confirm* the correctness and minimality of the LLM's generated proof. Instead of correcting errors or pruning extraneous steps, it validated that the neuro-generated logic was sound and aligned with symbolic reasoning principles. This demonstrates Z3's role in providing a symbolic \"seal of approval\" for LLM-generated logical outputs, improving confidence in the faithfulness of the logic even when the LLM performs well.\n\n### 3. Graceful Degradation (Belief Revision)\n\nLet's relax the premise: \"Each zumpus is angry.\"\n\n**New partial valid prefix/derivation:**\n\n*   Polly is a vumpus.\n*   Vumpuses are zumpuses.\n*   Derived: Polly is a zumpus."
+    },
+    "example3": {
+        "theory": "Dumpuses are sweet. Every vumpus is fast. Shumpuses are angry. Dumpuses are lorpuses. Dumpuses are tumpuses. Every vumpus is a dumpus. Every shumpus is a zumpus. Tumpuses are not transparent. Each vumpus is a lempus. Lempuses are temperate. Fae is a shumpus. Fae is a vumpus.",
+        "query": "Prove: Fae is sweet.",
+        "gold_standard_proof": [
+            "Step_12: Fae is a vumpus.",
+            "Step_6: Every vumpus is a dumpus.",
+            "Derived: Fae is a dumpus.",
+            "Step_1: Dumpuses are sweet.",
+            "Derived: Fae is sweet."
+        ],
+        "pure_llm_baseline": "Here's the step-by-step logical proof:\n\n1.  Fae is a vumpus. (Given)\n2.  Every vumpus is a dumpus. (Given)\n3.  Therefore, Fae is a dumpus. (From 1 and 2)\n4.  Dumpuses are sweet. (Given)\n5.  Therefore, Fae is sweet. (From 3 and 4)",
+        "hybrid_z3_verdict": "SUCCESS: Verified. Core: [Step_6_EveryVumpusIsADumpus,\n Step_1_DumpusesAreSweet,\n Negation_of_Query_FaeIsSweet,\n Step_12_FaeIsAVumpus]",
+        "comparative_analysis": "### 1. Verified Logical Chain\n\nBased on the HYBRID Z3 UNSAT CORE labels and the Original Theory, the validated proof steps are:\n\n1.  Fae is a vumpus.\n2.  Every vumpus is a dumpus.\n3.  *Derived:* Fae is a dumpus.\n4.  Dumpuses are sweet.\n5.  *Derived:* Fae is sweet.\n\n### 2. Comparative Analysis\n\nIn this specific instance, the PURE LLM BASELINE produced a proof identical in structure and content to both the GOLD STANDARD PROOF and the Verified Logical Chain derived from the Z3 UNSAT core. The LLM correctly identified the necessary premises from the original theory and accurately performed the logical deductions required to reach the conclusion. It neither hallucinated steps nor skipped any crucial intermediate derivations.\n\nThe Z3 verification, by identifying the minimal set of premises (the UNSAT core) required to prove the query, formally validates the faithfulness and soundness of the logic path found by the LLM. While the LLM arrived at the correct solution heuristically, Z3 provides a rigorous, formal guarantee that these specific premises are sufficient and necessary, thereby increasing confidence in the logical integrity of the solution.\n\n### 3. Graceful Degradation (Belief Revision)\n\nIf we relax (remove) the premise \"Dumpuses are sweet.\" from the Verified Logical Chain, the remaining partial valid prefix/derivation is:\n\n1.  Fae is a vumpus.\n2.  Every vumpus is a dumpus.\n3.  *Derived:* Fae is a dumpus."
+    }
+}

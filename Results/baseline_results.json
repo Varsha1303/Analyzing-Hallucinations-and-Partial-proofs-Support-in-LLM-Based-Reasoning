@@ -1,0 +1,28 @@
+{
+    "METRICS_DASHBOARD": {
+        "total_processed": 1,
+        "verified_success_count": 0,
+        "logical_failures_caught": 0,
+        "syntax_errors": 1
+    },
+    "CASE_STUDIES": {
+        "example1": {
+            "theory": "Zumpuses are rompuses. Every impus is not loud. Zumpuses are jompuses. Every rompus is a tumpus. Wumpuses are lorpuses. Zumpuses are opaque. Numpuses are impuses. Jompuses are windy. Each lempus is a vumpus. Vumpuses are not liquid. Every lempus is a zumpus. Numpuses are not temperate. Each wumpus is feisty. Every lempus is kind. Each rompus is not sour. Each rompus is a grimpus. Numpuses are lempuses. Every grimpus is not floral. Rex is a numpus. Rex is a wumpus.",
+            "query": "Prove: Rex is not sour.",
+            "gold_standard_proof": [
+                "Step_19: Rex is a numpus.",
+                "Step_17: Numpuses are lempuses.",
+                "Derived: Rex is a lempus.",
+                "Step_11: Every lempus is a zumpus.",
+                "Derived: Rex is a zumpus.",
+                "Step_1: Zumpuses are rompuses.",
+                "Derived: Rex is a rompus.",
+                "Step_15: Each rompus is not sour.",
+                "Derived: Rex is not sour."
+            ],
+            "pure_llm_baseline": "Here is a step-by-step deduction to prove that Rex is not sour:\n\n**Given Facts:**\n1.  **Zumpuses are rompuses.** (Given)\n2.  **Every impus is not loud.** (Given)\n3.  **Zumpuses are jompuses.** (Given)\n4.  **Every rompus is a tumpus.** (Given)\n5.  **Wumpuses are lorpuses.** (Given)\n6.  **Zumpuses are opaque.** (Given)\n7.  **Numpuses are impuses.** (Given)\n8.  **Jompuses are windy.** (Given)\n9.  **Each lempus is a vumpus.** (Given)\n10. **Vumpuses are not liquid.** (Given)\n11. **Every lempus is a zumpus.** (Given)\n12. **Numpuses are not temperate.** (Given)\n13. **Each wumpus is feisty.** (Given)\n14. **Every lempus is kind.** (Given)\n15. **Each rompus is not sour.** (Given)\n16. **Each rompus is a grimpus.** (Given)\n17. **Numpuses are lempuses.** (Given)\n18. **Every grimpus is not floral.** (Given)\n19. **Rex is a numpus.** (Given)\n20. **Rex is a wumpus.** (Given)\n\n**Deduction:**\n\n*   From (19), we know that **Rex is a numpus.**\n*   From (19) and (17), we deduce: Since **Rex is a numpus** and **Numpuses are lempuses**, it follows that **Rex is a lempus.**\n*   From (11), we know that **Every lempus is a zumpus.**\n*   From the previous deduction (**Rex is a lempus**) and (11), we deduce: Since **Rex is a lempus** and **Every lempus is a zumpus**, it follows that **Rex is a zumpus.**\n*   From (1), we know that **Zumpuses are rompuses.**\n*   From the previous deduction (**Rex is a zumpus**) and (1), we deduce: Since **Rex is a zumpus** and **Zumpuses are rompuses**, it follows that **Rex is a rompus.**\n*   From (15), we know that **Each rompus is not sour.**\n*   From the previous deduction (**Rex is a rompus**) and (15), we deduce: Since **Rex is a rompus** and **Each rompus is not sour**, it follows that **Rex is not sour.**\n\n**Therefore, Rex is not sour.**",
+            "hybrid_z3_verdict": "SYNTAX ERROR: invalid syntax (<string>, line 1)",
+            "comparative_analysis": "N/A - Proof failed verification."
+        }
+    }
+}

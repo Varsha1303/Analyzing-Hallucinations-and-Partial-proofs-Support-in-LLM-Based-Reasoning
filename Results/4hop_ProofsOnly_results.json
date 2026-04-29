@@ -1,0 +1,74 @@
+{
+    "example1": {
+        "theory": "Zumpuses are rompuses. Every impus is not loud. Zumpuses are jompuses. Every rompus is a tumpus. Wumpuses are lorpuses. Zumpuses are opaque. Numpuses are impuses. Jompuses are windy. Each lempus is a vumpus. Vumpuses are not liquid. Every lempus is a zumpus. Numpuses are not temperate. Each wumpus is feisty. Every lempus is kind. Each rompus is not sour. Each rompus is a grimpus. Numpuses are lempuses. Every grimpus is not floral. Rex is a numpus. Rex is a wumpus.",
+        "query": "Prove: Rex is not sour.",
+        "gold_standard_proof": [
+            "Step_19: Rex is a numpus.",
+            "Step_17: Numpuses are lempuses.",
+            "Derived: Rex is a lempus.",
+            "Step_11: Every lempus is a zumpus.",
+            "Derived: Rex is a zumpus.",
+            "Step_1: Zumpuses are rompuses.",
+            "Derived: Rex is a rompus.",
+            "Step_15: Each rompus is not sour.",
+            "Derived: Rex is not sour."
+        ],
+        "pure_llm_baseline": "Here's a step-by-step logical deduction:\n\n1.  **Rex is a numpus.** (Given)\n2.  **Numpuses are lempuses.** (Given)\n3.  Therefore, **Rex is a lempus.** (From 1 and 2)\n4.  **Every lempus is a zumpus.** (Given)\n5.  Therefore, **Rex is a zumpus.** (From 3 and 4)\n6.  **Zumpuses are rompuses.** (Given)\n7.  Therefore, **Rex is a rompus.** (From 5 and 6)\n8.  **Each rompus is not sour.** (Given)\n9.  Therefore, **Rex is not sour.** (From 7 and 8)",
+        "hybrid_z3_verdict": "SUCCESS: Verified. Core: [Step_1_rex,\n Step_11_rex,\n Step_15_rex,\n Step_17_rex,\n Step_19_rex_is_numpus,\n Negation_of_query]",
+        "comparative_analysis": "### 1. Verified Logical Chain\n\nHere is the logical chain verified by the Z3 SMT solver, using the exact English sentences from the original theory:\n\n1.  Rex is a numpus.\n2.  Numpuses are lempuses.\n3.  Derived: Rex is a lempus.\n4.  Every lempus is a zumpus.\n5.  Derived: Rex is a zumpus.\n6.  Zumpuses are rompuses.\n7.  Derived: Rex is a rompus.\n8.  Each rompus is not sour.\n9.  Derived: Rex is not sour.\n\n### 2. Comparative Analysis\n\nIn this particular instance, the PURE LLM BASELINE demonstrated remarkable accuracy, producing a logical deduction chain that is identical in every step and conclusion to both the GOLD STANDARD PROOF and the Z3-verified Logical Chain. The pure LLM did not hallucinate any facts or relationships, nor did it skip any necessary steps to reach the conclusion. It correctly identified and sequenced all the relevant premises from the Original Theory.\n\nThe Z3 verification, in this case, served to *confirm* the faithfulness and correctness of the LLM's output. While the LLM independently generated a perfect proof, the Z3 component acts as a robust symbolic guardrail, ensuring that the neuro-generated logic is sound and directly derivable from the given premises. This highlights the potential of hybrid neuro-symbolic systems: even when the neural component performs flawlessly, the symbolic verification provides an objective, explainable, and verifiably correct stamp of approval, crucial for high-stakes applications.\n\n### 3. Graceful Degradation (Belief Revision)\n\nLet's \"relax\" or remove the premise: **Zumpuses are rompuses.**\n\nIf this premise is removed, we can no longer establish the connection between Zumpuses and Rompuses, which is crucial for proving that Rex is a rompus and subsequently that Rex is not sour.\n\nThe new \"partial valid prefix/derivation\" that remains after removing \"Zumpuses are rompuses.\" would be:\n\n1.  Rex is a numpus.\n2.  Numpuses are lempuses.\n3.  Derived: Rex is a lempus.\n4.  Every lempus is a zumpus.\n5.  Derived: Rex is a zumpus."
+    },
+    "example2": {
+        "theory": "Each grimpus is liquid. Each wumpus is an impus. Every zumpus is a grimpus. Wumpuses are numpuses. Yumpuses are tumpuses. Lorpuses are brimpuses. Each yumpus is opaque. Every tumpus is not angry. Rompuses are fruity. Every zumpus is a yumpus. Each sterpus is sour. Each numpus is orange. Every lorpus is discordant. Each sterpus is a rompus. Yumpuses are sterpuses. Wumpuses are shy. Zumpuses are hot. Sterpuses are wumpuses. Alex is a zumpus. Alex is a lorpus.",
+        "query": "Prove: Alex is shy.",
+        "gold_standard_proof": [
+            "Step_19: Alex is a zumpus.",
+            "Step_10: Every zumpus is a yumpus.",
+            "Derived: Alex is a yumpus.",
+            "Step_15: Yumpuses are sterpuses.",
+            "Derived: Alex is a sterpus.",
+            "Step_18: Sterpuses are wumpuses.",
+            "Derived: Alex is a wumpus.",
+            "Step_16: Wumpuses are shy.",
+            "Derived: Alex is shy."
+        ],
+        "pure_llm_baseline": "Here's the step-by-step proof:\n\n1.  We are given that Alex is a zumpus.\n2.  We are given that every zumpus is a yumpus.\n3.  From (1) and (2), we can conclude that Alex is a yumpus.\n4.  We are given that yumpuses are sterpuses.\n5.  From (3) and (4), we can conclude that Alex is a sterpus.\n6.  We are given that sterpuses are wumpuses.\n7.  From (5) and (6), we can conclude that Alex is a wumpus.\n8.  We are given that wumpuses are shy.\n9.  From (7) and (8), we can conclude that Alex is shy.\n\nTherefore, Alex is shy.",
+        "hybrid_z3_verdict": "SUCCESS: Verified. Core: [Step_19_alex_is_zumpus,\n Step_18_sterpus_wumpus,\n Step_16_wumpus_shy,\n Step_15_yumpus_sterpus,\n Step_10_zumpus_yumpus,\n Query_negation]",
+        "comparative_analysis": "### 1. Verified Logical Chain\n\n1.  Alex is a zumpus.\n2.  Every zumpus is a yumpus.\n3.  Derived: Alex is a yumpus.\n4.  Yumpuses are sterpuses.\n5.  Derived: Alex is a sterpus.\n6.  Sterpuses are wumpuses.\n7.  Derived: Alex is a wumpus.\n8.  Wumpuses are shy.\n9.  Derived: Alex is shy.\n\n### 2. Comparative Analysis\n\nIn this particular instance, the PURE LLM BASELINE performed exceptionally well, producing a proof that is virtually identical in its logical steps and conclusions to the GOLD STANDARD PROOF. The LLM did not hallucinate any facts or skip any necessary steps; it faithfully reconstructed the correct inferential chain. The HYBRID Z3 UNSAT CORE labels served to formally verify this logical path by identifying the minimal set of atomic premises from the original theory required to derive the conclusion. While the LLM's output was already accurate, the Z3 verification provides a formal guarantee of soundness and completeness for the underlying logical structure, confirming that the LLM's reasoning, when mapped to these core premises, is unimpeachable. It confirms the faithfulness of the logic by pointing to the exact original statements that underpin the successful proof.\n\n### 3. Graceful Degradation (Belief Revision)\n\nLet's relax the premise: \"Sterpuses are wumpuses.\"\n\nNew partial valid prefix/derivation:\n1.  Alex is a zumpus.\n2.  Every zumpus is a yumpus.\n3.  Derived: Alex is a yumpus.\n4.  Yumpuses are sterpuses.\n5.  Derived: Alex is a sterpus.\n\nWithout the premise \"Sterpuses are wumpuses,\" we can only establish that \"Alex is a sterpus.\" We cannot further derive that Alex is a wumpus, and therefore cannot conclude that Alex is shy, as the inferential link is broken at this point."
+    },
+    "example3": {
+        "theory": "Every impus is a wumpus. Yumpuses are impuses. Yumpuses are not fast. Every jompus is metallic. Each rompus is dull. Sterpuses are not shy. Each impus is not sunny. Vumpuses are yumpuses. Grimpuses are numpuses. Lorpuses are temperate. Each shumpus is large. Grimpuses are not amenable. Jompuses are shumpuses. Numpuses are not opaque. Every yumpus is a sterpus. Each lorpus is a lempus. Brimpuses are not brown. Every vumpus is a brimpus. Grimpuses are jompuses. Impuses are rompuses. Each vumpus is earthy. Each jompus is a vumpus. Fae is a lorpus. Fae is a jompus.",
+        "query": "Prove: Fae is not sunny.",
+        "gold_standard_proof": [
+            "Step_24: Fae is a jompus.",
+            "Step_22: Each jompus is a vumpus.",
+            "Derived: Fae is a vumpus.",
+            "Step_8: Vumpuses are yumpuses.",
+            "Derived: Fae is a yumpus.",
+            "Step_2: Yumpuses are impuses.",
+            "Derived: Fae is an impus.",
+            "Step_7: Each impus is not sunny.",
+            "Derived: Fae is not sunny."
+        ],
+        "pure_llm_baseline": "Here's a step-by-step proof:\n\n1.  We are given that Fae is a jompus.\n2.  We are given the statement: \"Each jompus is a vumpus.\"\n3.  From (1) and (2), we can conclude that Fae is a vumpus.\n4.  We are given the statement: \"Vumpuses are yumpuses.\"\n5.  From (3) and (4), we can conclude that Fae is a yumpus.\n6.  We are given the statement: \"Yumpuses are impuses.\"\n7.  From (5) and (6), we can conclude that Fae is an impus.\n8.  We are given the statement: \"Each impus is not sunny.\"\n9.  From (7) and (8), we can conclude that Fae is not sunny.",
+        "hybrid_z3_verdict": "SUCCESS: Verified. Core: [Step_7_impus_not_sunny,\n Step_22_jompus_is_vumpus,\n Negation_Query_Fae_is_Sunny,\n Step_2_yumpus_is_impus,\n Fact_Fae_is_Jompus,\n Step_8_vumpus_is_yumpus]",
+        "comparative_analysis": "### 1. Verified Logical Chain\n\n*   Fae is a jompus.\n*   Each jompus is a vumpus.\n*   Derived: Fae is a vumpus.\n*   Vumpuses are yumpuses.\n*   Derived: Fae is a yumpus.\n*   Yumpuses are impuses.\n*   Derived: Fae is an impus.\n*   Each impus is not sunny.\n*   Derived: Fae is not sunny.\n\n### 2. Comparative Analysis\n\nIn this particular instance, the PURE LLM BASELINE performed exceptionally well, perfectly replicating the GOLD STANDARD PROOF's logical chain, including all necessary premises and derived intermediate conclusions. The LLM did not hallucinate any facts or logical steps, nor did it skip any crucial deductions. Its reasoning was faithful to the provided theory. The Z3 verification, by identifying the minimal unsat core (the exact set of premises required for the proof), serves to formally validate the faithfulness and completeness of the logic presented by both the GOLD STANDARD and the PURE LLM BASELINE, confirming that the LLM's solution used only necessary and correct information to reach the conclusion.\n\n### 3. Graceful Degradation (Belief Revision)\n\nLet's relax the premise: \"Yumpuses are impuses.\"\n\n**New partial valid prefix/derivation:**\n\n*   Fae is a jompus.\n*   Each jompus is a vumpus.\n*   Derived: Fae is a vumpus.\n*   Vumpuses are yumpuses.\n*   Derived: Fae is a yumpus.\n\nAt this point, without the link that \"Yumpuses are impuses,\" we cannot connect 'Fae is a yumpus' to 'Fae is an impus,' and thus cannot use the premise \"Each impus is not sunny\" to prove that Fae is not sunny. The derivation stops, as we lack the necessary information to proceed."
+    },
+    "example4": {
+        "theory": "Every numpus is a grimpus. Every rompus is cold. Dumpuses are not luminous. Gorpuses are not large. Yumpuses are not orange. Yumpuses are tumpuses. Every vumpus is not transparent. Each sterpus is feisty. Lorpuses are impuses. Every shumpus is rainy. Each tumpus is a shumpus. Each lorpus is a vumpus. Gorpuses are numpuses. Each numpus is moderate. Tumpuses are lorpuses. Numpuses are yumpuses. Sterpuses are jompuses. Each yumpus is a rompus. Grimpuses are not discordant. Tumpuses are bright. Every lorpus is not floral. Gorpuses are dumpuses. Polly is a sterpus. Polly is a numpus.",
+        "query": "Prove: Polly is not floral.",
+        "gold_standard_proof": [
+            "Step_24: Polly is a numpus.",
+            "Step_16: Numpuses are yumpuses.",
+            "Derived: Polly is a yumpus.",
+            "Step_6: Yumpuses are tumpuses.",
+            "Derived: Polly is a tumpus.",
+            "Step_15: Tumpuses are lorpuses.",
+            "Derived: Polly is a lorpus.",
+            "Step_21: Every lorpus is not floral.",
+            "Derived: Polly is not floral."
+        ],
+        "pure_llm_baseline": "Here's the step-by-step proof:\n\n1.  **Polly is a numpus.** (Given)\n2.  **Numpuses are yumpuses.** (Given)\n3.  From (1) and (2), we deduce that **Polly is a yumpus.**\n4.  **Yumpuses are tumpuses.** (Given)\n5.  From (3) and (4), we deduce that **Polly is a tumpus.**\n6.  **Tumpuses are lorpuses.** (Given)\n7.  From (5) and (6), we deduce that **Polly is a lorpus.**\n8.  **Every lorpus is not floral.** (Given)\n9.  From (7) and (8), we conclude that **Polly is not floral.**",
+        "hybrid_z3_verdict": "SUCCESS: Verified. Core: [Polly_Rule_6,\n Step_24,\n Polly_Rule_15,\n Polly_Rule_16,\n Polly_Rule_21,\n Query_Negation]",
+        "comparative_analysis": "### 1. Verified Logical Chain\n\n*   Polly is a numpus.\n*   Numpuses are yumpuses.\n*   Derived: Polly is a yumpus.\n*   Yumpuses are tumpuses.\n*   Derived: Polly is a tumpus.\n*   Tumpuses are lorpuses.\n*   Derived: Polly is a lorpus.\n*   Every lorpus is not floral.\n*   Derived: Polly is not floral.\n\n### 2. Comparative Analysis\n\nIn this specific instance, the PURE LLM BASELINE produced a proof that is identical in structure and content to both the GOLD STANDARD PROOF and the Verified Logical Chain. The pure LLM did not hallucinate information or skip any necessary logical steps; it accurately identified the correct chain of reasoning to reach the conclusion.\n\nThe role of Z3 verification in this scenario, therefore, was not to correct LLM errors but to formally guarantee the soundness and completeness of the identified logical path. The HYBRID Z3 UNSAT CORE LABELS confirm that the precise set of premises used by the LLM (and the Gold Standard) are indeed sufficient and necessary to logically derive the query. This ensures the faithfulness of the logic, providing a robust, machine-verifiable foundation for the LLM's output, even when the LLM's reasoning appears correct. It transforms a plausible narrative into a formally validated proof.\n\n### 3. Graceful Degradation (Belief Revision)\n\nLet's relax the premise: \"Tumpuses are lorpuses.\"\n\nThe new partial valid prefix/derivation that remains after removal is:\n\n*   Polly is a numpus.\n*   Numpuses are yumpuses.\n*   Derived: Polly is a yumpus.\n*   Yumpuses are tumpuses.\n*   Derived: Polly is a tumpus.\n\nAt this point, we can derive that \"Polly is a tumpus,\" but without the rule \"Tumpuses are lorpuses,\" we cannot connect \"Polly is a tumpus\" to \"Polly is a lorpus,\" and thus cannot proceed to the final conclusion that \"Polly is not floral.\""
+    }
+}

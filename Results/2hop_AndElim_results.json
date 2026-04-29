@@ -1,0 +1,72 @@
+{
+    "example1": {
+        "theory": "Every dumpus is a jompus and a zumpus. Wumpuses are yumpuses and impuses. Each rompus is a lorpus and a numpus. Yumpuses are rompuses and dumpuses. Grimpuses are slow and brimpuses. Tumpuses are wumpuses. Numpuses are lempuses and gorpuses. Impuses are shumpuses and vumpuses. Sally is a gorpus and a lempus. Sally is an impus and a wumpus.",
+        "query": "Prove: Sally is a yumpus.",
+        "gold_standard_proof": [
+            "Step_10: Sally is an impus and a wumpus.",
+            "Derived: Sally is a wumpus.",
+            "Step_2: Wumpuses are yumpuses and impuses.",
+            "Derived: Sally is a yumpus and an impus.",
+            "Derived: Sally is a yumpus."
+        ],
+        "pure_llm_baseline": "Here's the step-by-step proof:\n\n1.  We are given the statement: \"Sally is an impus and a wumpus.\"\n2.  From the general theory, we have the rule: \"Wumpuses are yumpuses and impuses.\"\n3.  This rule implies that any entity that is a wumpus is also, by definition, a yumpus (and an impus).\n4.  Since Sally is a wumpus (from step 1), it directly follows from the rule in step 2 that Sally is a yumpus.\n\n**Conclusion:** Sally is a yumpus.",
+        "hybrid_z3_verdict": "SUCCESS: Verified. Core: [Step_2, Step_12_Sally_is_a_wumpus, Negated_Query]",
+        "comparative_analysis": "### 1. Verified Logical Chain\n\n1.  Sally is an impus and a wumpus.\n2.  Wumpuses are yumpuses and impuses.\n3.  Derived: Sally is a wumpus. (From 1)\n4.  Derived: If something is a wumpus, then it is a yumpus. (From 2)\n5.  Derived: Sally is a yumpus. (From 3 and 4)\n\n### 2. Comparative Analysis\n\nThe PURE LLM BASELINE correctly identifies the necessary premises and steps to prove that Sally is a yumpus. It does not hallucinate any facts or rules. Compared to the GOLD STANDARD, the LLM provides a more narrative explanation rather than a strictly formal, step-by-step derivation using explicit \"Derived\" statements. It implies certain intermediate steps (like extracting \"Sally is a wumpus\" from the initial statement and the conditional \"If a wumpus then a yumpus\" from the general rule) but doesn't explicitly label them as separate derivations. It's concise and logically sound but less granular than the Gold Standard's breakdown.\n\nThe Z3 verification (HYBRID Z3 UNSAT CORE LABELS) significantly improves the faithfulness and precision of the logic by pinpointing the absolute minimal set of *original* premises required for the proof: \"Sally is an impus and a wumpus\" (from which \"Sally is a wumpus\" is extracted) and \"Wumpuses are yumpuses and impuses.\" This symbolic approach confirms that no extraneous information was used, and the proof relies solely on these facts, ensuring absolute logical fidelity to the problem's given theory. While the pure LLM provides a reasonable natural language explanation, the Z3-backed approach validates the precise subset of foundational knowledge that underpins the conclusion.\n\n### 3. Graceful Degradation (Belief Revision)\n\nLet's relax (remove) the premise: **\"Wumpuses are yumpuses and impuses.\"**\n\n**New partial valid prefix/derivation after removal:**\n\n1.  Sally is an impus and a wumpus.\n2.  Derived: Sally is an impus.\n3.  Derived: Sally is a wumpus.\n\nAt this point, we know Sally is both an impus and a wumpus. However, without the rule stating that \"Wumpuses are yumpuses,\" we can no longer logically derive that \"Sally is a yumpus.\" The derivation stops at establishing Sally's identity as a wumpus and an impus, but cannot connect it to being a yumpus."
+    },
+    "example2": {
+        "theory": "Gorpuses are dumpuses and numpuses. Impuses are nervous and grimpuses. Numpuses are wumpuses and vumpuses. Each brimpus is a tumpus and a sterpus. Dumpuses are yumpuses and lempuses. Vumpuses are lorpuses and zumpuses. Each wumpus is a brimpus and a jompus. Wren is a numpus and a vumpus. Wren is a sterpus and a tumpus.",
+        "query": "Prove: Wren is a wumpus.",
+        "gold_standard_proof": [
+            "Step_8: Wren is a numpus and a vumpus.",
+            "Derived: Wren is a numpus.",
+            "Step_3: Numpuses are wumpuses and vumpuses.",
+            "Derived: Wren is a wumpus and a vumpus.",
+            "Derived: Wren is a wumpus."
+        ],
+        "pure_llm_baseline": "Here's the step-by-step proof:\n\n1.  We are given that \"Wren is a numpus\" (from the statement \"Wren is a numpus and a vumpus\").\n2.  We are given the rule \"Numpuses are wumpuses\" (from the statement \"Numpuses are wumpuses and vumpuses\").\n3.  Applying the rule from step 2 to the fact from step 1, if Wren is a numpus, then Wren must also be a wumpus.\n4.  Therefore, Wren is a wumpus.",
+        "hybrid_z3_verdict": "SUCCESS: Verified. Core: [Wren_Prop_3,\n Fact_Wren_is_Numpus_and_Vumpus,\n Negation_of_Query]",
+        "comparative_analysis": "### 1. Verified Logical Chain\n\nThe Z3 UNSAT CORE labels point to the essential premises required for the proof. These correspond directly to the following sentences from the Original Theory:\n\n1.  Wren is a numpus and a vumpus.\n2.  Numpuses are wumpuses and vumpuses.\n\nBased on these premises, the validated logical chain is:\n\n*   From \"Wren is a numpus and a vumpus.\", we derive: \"Wren is a numpus.\"\n*   From \"Numpuses are wumpuses and vumpuses.\", we derive: \"Numpuses are wumpuses.\"\n*   Combining \"Wren is a numpus\" and \"Numpuses are wumpuses\", we conclude: \"Wren is a wumpus.\"\n\n### 2. Comparative Analysis\n\nThe PURE LLM BASELINE provided a remarkably accurate and concise proof for this particular query. It correctly identified the necessary atomic facts and rules:\n\n1.  It correctly extracted \"Wren is a numpus\" from \"Wren is a numpus and a vumpus.\"\n2.  It correctly extracted \"Numpuses are wumpuses\" from \"Numpuses are wumpuses and vumpuses.\"\n3.  It then correctly applied the inference rule to conclude \"Wren is a wumpus.\"\n\nIn this instance, the pure LLM did not hallucinate and did not skip any essential logical steps. Its reasoning closely mirrors both the GOLD STANDARD PROOF and the Verified Logical Chain derived from the Z3 UNSAT core. The Z3 verification confirms that the premises the LLM implicitly relied upon (\"Wren is a numpus and a vumpus\" and \"Numpuses are wumpuses and vumpuses\") are indeed the minimal and correct set of facts from the theory required to prove the query. The Z3 system thus provided formal validation for the faithfulness of the LLM's logical premises, even if the LLM's step-by-step description was slightly more abstract in extracting sub-clauses.\n\n### 3. Graceful Degradation (Belief Revision)\n\nLet's identify and remove the premise: \"Numpuses are wumpuses and vumpuses.\"\n\n**New partial valid prefix/derivation:**\n\nIf we remove the premise \"Numpuses are wumpuses and vumpuses,\" we are left with the following valid derivation:\n\n*   We still know: \"Wren is a numpus and a vumpus.\"\n*   From this, we can still logically derive: \"Wren is a numpus.\"\n*   We can also derive: \"Wren is a vumpus.\"\n\nHowever, without the rule connecting \"numpuses\" to \"wumpuses,\" we no longer have the necessary information to prove that \"Wren is a wumpus.\" The derivation stops at identifying Wren as a numpus (and a vumpus), unable to connect to the target concept of \"wumpus.\""
+    },
+    "example3": {
+        "theory": "Sterpuses are rompuses. Every gorpus is a jompus and a zumpus. Dumpuses are numpuses and grimpuses. Vumpuses are discordant and lorpuses. Each brimpus is a shumpus and a lempus. Zumpuses are wumpuses and tumpuses. Every rompus is a yumpus and a brimpus. Every yumpus is a dumpus and a gorpus. Fae is a tumpus and a wumpus. Fae is a brimpus and a rompus.",
+        "query": "Prove: Fae is a yumpus.",
+        "gold_standard_proof": [
+            "Step_10: Fae is a brimpus and a rompus.",
+            "Derived: Fae is a rompus.",
+            "Step_7: Every rompus is a yumpus and a brimpus.",
+            "Derived: Fae is a yumpus and a brimpus.",
+            "Derived: Fae is a yumpus."
+        ],
+        "pure_llm_baseline": "Here's a step-by-step chain of thought to prove that Fae is a yumpus:\n\n1.  **Identify direct information about Fae:**\n    From the theory, we are given: \"Fae is a brimpus and a rompus.\"\n    This statement tells us two things about Fae:\n    *   Fae is a brimpus.\n    *   Fae is a rompus.\n\n2.  **Identify the relationship between 'rompus' and 'yumpus':**\n    From the theory, we are given: \"Every rompus is a yumpus and a brimpus.\"\n    This statement tells us that if something is a rompus, it *must also* be a yumpus (and a brimpus).\n\n3.  **Combine the information:**\n    Since we know from step 1 that Fae is a rompus, and we know from step 2 that every rompus is a yumpus, it logically follows that Fae must be a yumpus.\n\nTherefore, Fae is a yumpus.",
+        "hybrid_z3_verdict": "SUCCESS: Verified. Core: [Step_7, Step_10b, Negation_of_Query, Fae_Exists]",
+        "comparative_analysis": "### 1. Verified Logical Chain\n\n*   Fae is a brimpus and a rompus.\n*   Derived: Fae is a rompus.\n*   Every rompus is a yumpus and a brimpus.\n*   Derived: Fae is a yumpus and a brimpus.\n*   Derived: Fae is a yumpus.\n\n### 2. Comparative Analysis\n\nThe PURE LLM BASELINE successfully and accurately derived the conclusion that Fae is a yumpus. It did not hallucinate any facts, and all premises used were directly from the provided Original Theory. The LLM's steps are logically sound, though slightly more condensed than the GOLD STANDARD PROOF. Specifically, the LLM combines the step of deriving \"Fae is a yumpus and a brimpus\" and then \"Fae is a yumpus\" into a single logical leap in its third step. This is not skipping a necessary logical step that would invalidate the proof, but rather a less granular presentation compared to the GOLD STANDARD's explicit intermediate derivation.\n\nThe Z3 verification greatly improved the faithfulness of the logic by formally identifying the *exact* minimal set of premises (`Step_7`, `Step_10b`) required from the Original Theory to prove the query. This ensures that the Verified Logical Chain is fully grounded in the source text and that no extraneous information or implicit assumptions are used. While the LLM performed well in this simple case, the Z3 approach provides an auditable, formal guarantee of soundness and minimality, which is crucial for complex reasoning tasks to prevent subtle errors or the introduction of unstated assumptions that LLMs might inadvertently include.\n\n### 3. Graceful Degradation (Belief Revision)\n\nLet's relax (remove) the premise: \"Every rompus is a yumpus and a brimpus.\"\n\nThe new partial valid prefix/derivation that remains after removal is:\n\n*   Fae is a brimpus and a rompus.\n*   Derived: Fae is a rompus.\n*   Derived: Fae is a brimpus.\n\nWithout the premise \"Every rompus is a yumpus and a brimpus,\" we cannot establish a link between 'rompus' and 'yumpus', and thus cannot derive that Fae is a yumpus."
+    },
+    "example4": {
+        "theory": "Each numpus is a rompus and a zumpus. Dumpuses are small and brimpuses. Lempuses are yumpuses and shumpuses. Lorpuses are numpuses and lempuses. Each wumpus is a vumpus and a lorpus. Vumpuses are jompuses and impuses. Rompuses are tumpuses and gorpuses. Fae is a lempus and a lorpus. Fae is a tumpus and a gorpus.",
+        "query": "Prove: Fae is a numpus.",
+        "gold_standard_proof": [
+            "Step_8: Fae is a lempus and a lorpus.",
+            "Derived: Fae is a lorpus.",
+            "Step_4: Lorpuses are numpuses and lempuses.",
+            "Derived: Fae is a numpus and a lempus.",
+            "Derived: Fae is a numpus."
+        ],
+        "pure_llm_baseline": "Here's the step-by-step proof:\n\n1.  **Fae is a lorpus.** (This is given in the problem statement: \"Fae is a lempus and a lorpus.\")\n2.  The theory states: \"**Lorpuses are numpuses and lempuses.**\" (This is a definition provided in the problem.)\n3.  From the definition in step 2, if something is a lorpus, then it possesses both the characteristic of being a numpus and the characteristic of being a lempus.\n4.  Since Fae is a lorpus (from step 1), it must therefore also be a numpus (and a lempus, which is consistent with the initial given fact about Fae).\n5.  **Therefore, Fae is a numpus.**",
+        "hybrid_z3_verdict": "SUCCESS: Verified. Core: [Step_4_Fae_lorpus_numpus_lempus,\n NegatedQuery_FaeIsNumpus,\n Step_8b_FaeIsLorpus]",
+        "comparative_analysis": "Case study generation failed: All API keys have exhausted their daily quota."
+    },
+    "example5": {
+        "theory": "Every vumpus is sunny and a sterpus. Each tumpus is a zumpus and a jompus. Each grimpus is a tumpus and a shumpus. Shumpuses are gorpuses and lempuses. Lempuses are numpuses and impuses. Every wumpus is a brimpus and a grimpus. Every brimpus is a rompus and a lorpus. Fae is an impus and a numpus. Fae is a tumpus and a grimpus.",
+        "query": "Prove: Fae is a shumpus.",
+        "gold_standard_proof": [
+            "Step_9: Fae is a tumpus and a grimpus.",
+            "Derived: Fae is a grimpus.",
+            "Step_3: Each grimpus is a tumpus and a shumpus.",
+            "Derived: Fae is a tumpus and a shumpus.",
+            "Derived: Fae is a shumpus."
+        ],
+        "pure_llm_baseline": "Baseline failed: All API keys have exhausted their daily quota.",
+        "hybrid_z3_verdict": "# API ERROR: All API keys have exhausted their daily quota.",
+        "comparative_analysis": "N/A - No core extracted."
+    }
+}
