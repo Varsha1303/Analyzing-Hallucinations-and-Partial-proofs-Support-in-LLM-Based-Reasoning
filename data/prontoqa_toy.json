@@ -1,0 +1,53 @@
+{
+  "toy_001": {
+    "context": "Every cat is a mammal. Every mammal is an animal. Fae is a cat.",
+    "question": "True or false: Fae is an animal.",
+    "answer": "True",
+    "chain_of_thought": [
+      "Fae is a cat.",
+      "Every cat is a mammal, so Fae is a mammal.",
+      "Every mammal is an animal, so Fae is an animal."
+    ]
+  },
+  "toy_002": {
+    "context": "Every dog is a mammal. Every mammal breathes air. Rex is a dog.",
+    "question": "True or false: Rex breathes air.",
+    "answer": "True",
+    "chain_of_thought": [
+      "Rex is a dog.",
+      "Every dog is a mammal, so Rex is a mammal.",
+      "Every mammal breathes air, so Rex breathes air."
+    ]
+  },
+  "toy_003": {
+    "context": "Every bird can fly. Every penguin is a bird. Pingu is a penguin.",
+    "question": "True or false: Pingu can fly.",
+    "answer": "True",
+    "chain_of_thought": [
+      "Pingu is a penguin.",
+      "Every penguin is a bird, so Pingu is a bird.",
+      "Every bird can fly, so Pingu can fly."
+    ]
+  },
+  "toy_004": {
+    "context": "Every cat is a mammal. Every reptile is cold-blooded. Luna is a cat.",
+    "question": "True or false: Luna is cold-blooded.",
+    "answer": "False",
+    "chain_of_thought": [
+      "Luna is a cat.",
+      "Cats are mammals, not reptiles.",
+      "Only reptiles are cold-blooded according to the given facts.",
+      "Therefore Luna is not cold-blooded."
+    ]
+  },
+  "toy_005": {
+    "context": "All fruits contain sugar. All apples are fruits. This object is an apple.",
+    "question": "True or false: This object contains sugar.",
+    "answer": "True",
+    "chain_of_thought": [
+      "This object is an apple.",
+      "All apples are fruits, so this object is a fruit.",
+      "All fruits contain sugar, so this object contains sugar."
+    ]
+  }
+}
